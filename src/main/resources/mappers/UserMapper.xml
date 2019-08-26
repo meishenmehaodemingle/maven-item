@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.items.mapper.UserMapper">
+
+    <resultMap id="user_result" type="User">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+    </resultMap>
+    <sql id="base_column_list">
+        uid,username
+    </sql>
+    <select id="findByUsername" resultMap="user_result">
+        select <include refid="base_column_list"></include>
+        from user u
+        where u.username=#{username}
+    </select>
+
+
+    <insert id="insertUser">
+        insert into user(username, password, email, utel)
+        values(#{username},#{password},#{email},#{utel})
+    </insert>
+
+</mapper>
