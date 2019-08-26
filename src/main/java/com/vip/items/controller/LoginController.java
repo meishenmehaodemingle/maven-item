@@ -18,7 +18,6 @@ public class LoginController {
     LoginService loginService;
     @GetMapping("/login")
     public Result<User> login(String username){
-
         try {
             User user = loginService.getUser(username);
             return Result.success(user);
