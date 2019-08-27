@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 @Slf4j
 @RequestMapping("/api/v2")
 public class LoginController {
+
     @Resource
     LoginService loginService;
     @GetMapping("/login")
