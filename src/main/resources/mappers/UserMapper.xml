@@ -5,9 +5,10 @@
     <resultMap id="user_result" type="User">
         <id property="uid" column="uid"/>
         <result property="username" column="username"/>
+        <result property="password" column="password"/>
     </resultMap>
     <sql id="base_column_list">
-        uid,username
+        uid,username,password
     </sql>
     <select id="findByUsername" resultMap="user_result">
         select <include refid="base_column_list"></include>

@@ -17,10 +17,12 @@ public class LoginController {
     @Resource
     LoginService loginService;
     @GetMapping("/login")
-    public Result<User> login(String username){
+    public Result<User> login(String username,String password){
         try {
-            User user = loginService.getUser(username);
-            return Result.success(user);
+            User user = loginService.getUser(username,password);
+            if (user != null){
+                return Result.success(user);
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
         }
