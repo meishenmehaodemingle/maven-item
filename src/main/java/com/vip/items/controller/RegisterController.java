@@ -25,12 +25,18 @@ public class RegisterController {
     public Result<Integer> register(String username,String password,
                                     String email,String utel){
         try {
-            User user = loginService.getUser(username);
-            if (user == null || "".equals(user)){
-                int i = registerService.insertUser(username, password, email, utel);
-                return Result.success(i);
+            if (username != null && !"".equals(username)
+                    && password != null && !"".equals(password)
+                    && utel != null && !"".equals(utel)){
+                User user = loginService.getUser(username);
+                if (user == null || "".equals(user)){
+                    int i = registerService.insertUser(username, password, email, utel);
+                    return Result.success(i);
+                }else {
+                    log.error("该用户已存在");
+                }
             }else {
-                log.error("该用户已存在");
+                log.error("必填信息为空");
             }
         } catch (Exception e) {
             log.error(e.getMessage());
