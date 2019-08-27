@@ -20,9 +20,11 @@ public class LoginController {
     public Result<User> login(String username,String password){
         log.error(username,password);
         try {
-            User user = loginService.getUser(username,password);
+            User user = loginService.getUser(username);
             if (user != null){
-                return Result.success(user);
+                if (user.getPassword().equals(password)){
+                    return Result.success(user);
+                }
             }
         } catch (Exception e) {
             log.error(e.getMessage());

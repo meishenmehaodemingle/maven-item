@@ -13,15 +13,8 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     UserMapper userMapper;
     @Override
-    public User getUser(String username,String password) {
+    public User getUser(String username) {
         User user = userMapper.findByUsername(username);
-        // 判断用户是否存在
-        if (user != null) {
-            // 判断密码是否一致
-            if (user.getPassword().equals(password)) {
-                return user;
-            }
-        }
-        return null;
+        return user;
     }
 }

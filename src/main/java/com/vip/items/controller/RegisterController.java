@@ -25,7 +25,7 @@ public class RegisterController {
     public Result<Integer> register(String username,String password,
                                     String email,String utel){
         try {
-            User user = loginService.getUser(username,password);
+            User user = loginService.getUser(username);
             if (user == null || "".equals(user)){
                 int i = registerService.insertUser(username, password, email, utel);
                 return Result.success(i);
