@@ -18,6 +18,7 @@ public class LoginController {
     LoginService loginService;
     @GetMapping("/login")
     public Result<User> login(String username,String password){
+        log.error(username,password);
         try {
             User user = loginService.getUser(username,password);
             if (user != null){
