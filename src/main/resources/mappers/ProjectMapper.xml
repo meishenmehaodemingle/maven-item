@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vip.items.mapper.ProjectMapper">
+    <resultMap id="project_keyword_result" type="com.vip.items.domain.vo.ProjectVo">
+        <id column="proid" property="proid"/>
+        <result property="proName" column="pro_Name"/>
+        <result property="createTime" column="create_Time"/>
+        <result property="proCom" column="pro_Com"/>
+        <result property="proRequest" column="pro_Request"/>
+        <result property="tel" column="tel"/>
+        <result property="time" column="time"/>
+        <association property="category" javaType="com.vip.items.domain.entity.Category">
+            <id column="cate_id" property="cateId"/>
+            <result property="cateName" column="cate_name"/>
+        </association>
+        <association property="subMenu2" javaType="com.vip.items.domain.entity.SubMenu2">
+            <id column="menu2_Id" property="menu2Id"/>
+            <result property="menu2Name" column="menu2_Name"/>
+        </association>
+        <association property="subMenu3" javaType="com.vip.items.domain.entity.SubMenu3">
+            <id column="menu3_Id" property="menu3Id"/>
+            <result property="menu3Name" column="menu3_Name"/>
+        </association>
+    </resultMap>
+    <!--p.proid,p.pro_name,p.create_time,p.pro_com,p.pro_request,p.tel,p.time-->
+    <select id="findByKeyword" resultMap="project_keyword_result">
+        select p.proid,p.pro_name,p.create_time,p.pro_com,p.pro_request,p.tel,p.time,
+        c2.cate_id,c2.cate_name,
+        sm2.menu2_id,sm2.menu2_name,
+        sm3.menu3_id,sm3.menu3_name
+        from project p
+        left join category c2 on p.cate_id = c2.cate_id
+        left join sub_menu2 sm2 on p.menu2_id = sm2.menu2_id
+        left join sub_menu3 sm3 on p.menu3_id = sm3.menu3_id
+        where p.pro_name like concat(concat('%',#{keyword}),'%')
+            or p.pro_request like concat(concat('%',#{keyword}),'%')
+    </select>
+
+</mapper>

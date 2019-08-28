@@ -15,6 +15,11 @@
                         <value>application/json;charset=utf-8</value>
                     </list>
                 </property>
+                <property name="fastJsonConfig">
+                    <bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
+                        <property name="dateFormat" value="yyyy.MM.dd"/>
+                    </bean>
+                </property>
             </bean>
 
         </mvc:message-converters>
